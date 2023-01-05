@@ -20,7 +20,7 @@ async def on_message(message):
 client.run(BOT_TOKEN)
 
 
-# MEME GRAB USING API 
+# MEME GRAB USING API --- example not a meme databank, need to find a suitable API
 
 import requests
 

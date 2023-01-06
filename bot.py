@@ -1,48 +1,59 @@
-
-# BOT SETUP
-
-BOT_TOKEN = "****"
+BOT_TOKEN = "***"
+REDDIT_SECRET_KEY = "***"
+REDDIT_CLIENT_ID = "***"
+REDDIT_USERNAME = "***"
+REDDIT_PW = "***"
 
 import discord
 import requests
 
+#------------------------------------------------------ DISCORD BOT SETUP BLOCK ----------------------------------------------------------------------#
+
 client = discord.Client(intents=discord.Intents.all())
 
-def Bot_login():
-	@client.event
-	async def on_ready():
-    	print("We have logged in as {0.user}".format(client))
-Bot_login()
+
+@client.event
+async def on_ready():
+	print("We have logged in as {0.user}".format(client))
 
 
-def Hello():
-    #bot says hello
-    @client.event
-    async def on_message(message):
-        if message.author == client.user:
-            return
-        if message.content.startswith('!hello'):
-            await message.channel.send('hello!')
-Hello()
-
+@client.event
+async def on_message(message):
+	if message.author == client.user:
+      		return
+	if message.content.startswith('!hello'):
+		await message.channel.send('hello!')
 
 client.run(BOT_TOKEN)
 
+#---------------------------------------------------- REDDIT API CONNECTION BLOCK --------------------------------------------------------------------#
 
-# MEME GRAB USING API --- example not a meme databank, need to find a suitable API
+Reddit_auth = requests.auth.HTTPBasicAuth(REDDIT_CLIENT_ID, REDDIT_SECRET_KEY)
 
-# end point
-url = "https://ronreiter-meme-generator.p.rapidapi.com/meme"
-
-#parameters
-querystring = {"top":"Top Text","bottom":"Bottom Text","meme":"Condescending-Wonka","font_size":"50","font":"Impact"}
-
-#authentication
-headers = {
-	"X-RapidAPI-Key": "****",
-	"X-RapidAPI-Host": "ronreiter-meme-generator.p.rapidapi.com"
+parameters = {
+    'grant_type': 'password',
+    'username': REDDIT_USERNAME,
+    'password': REDDIT_PW,
 }
 
-response = requests.request("GET", url, headers=headers, params=querystring)
+headers = {'User-Agent': 'MyAPI/0.0.1'}
+res = requests.post('https://www.reddit.com/api/v1/access_token'
+, auth=Reddit_auth, data=parameters, headers=headers)
 
-print(response.text)
+ACCESS_TOKEN = res.json()['access_token']
+
+headers['Authorization'] = f'bearer {ACCESS_TOKEN}'
+
+
+#----------------------------------------------------- CONNECTION STATUS CODE TEST -------------------------------------------------------------------#
+
+# test = requests.get('https://oauth.reddit.com/api/v1/me', headers=headers).json()
+# print(requests.Response.status_code)
+
+
+
+
+
+
+
+

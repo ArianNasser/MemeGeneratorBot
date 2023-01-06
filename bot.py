@@ -13,6 +13,7 @@ client = discord.Client(intents=discord.Intents.all())
 async def on_ready():
     print("We have logged in as {0.user}".format(client))
 
+
 def Hello():
     #bot says hello
     @client.event
@@ -21,7 +22,7 @@ def Hello():
             return
         if message.content.startswith('!hello'):
             await message.channel.send('hello!')
-
+Hello()
 
 
 client.run(BOT_TOKEN)

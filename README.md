@@ -9,6 +9,9 @@ This program is a discord Bot that posts "Memes" gathered from external API sour
 Component Description:
 
     1. Hello
-        the Hello function replys to a !hello with "hello!"
+        the Hello function replies to a !hello with "hello!"
+        
+    2. Meme
+        Meme Function replies to !meme with a meme url pulled using API
 
 //need information on how changes can be pushed to the live bot

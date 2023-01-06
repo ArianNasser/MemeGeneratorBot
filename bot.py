@@ -47,8 +47,8 @@ headers['Authorization'] = f'bearer {ACCESS_TOKEN}'
 
 #----------------------------------------------------- CONNECTION STATUS CODE TEST -------------------------------------------------------------------#
 
-# test = requests.get('https://oauth.reddit.com/api/v1/me', headers=headers).json()
-# print(requests.Response.status_code)
+test = requests.get('https://oauth.reddit.com/api/v1/me', headers=headers).json()
+print(requests.Response.status_code)
 
 
 

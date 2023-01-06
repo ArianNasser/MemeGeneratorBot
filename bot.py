@@ -8,10 +8,11 @@ import requests
 
 client = discord.Client(intents=discord.Intents.all())
 
-#bot login alert
-@client.event
-async def on_ready():
-    print("We have logged in as {0.user}".format(client))
+def Bot_login():
+	@client.event
+	async def on_ready():
+    	print("We have logged in as {0.user}".format(client))
+Bot_login()
 
 
 def Hello():
